@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RLL.Algorithms", "RLL.Algorithms\RLL.Algorithms.csproj", "{957EA675-30DD-45B6-B1E5-755E5C0AB0D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RLL.Terminal", "RLL.Terminal\RLL.Terminal.csproj", "{49E75BBD-8196-4670-B0C4-063D940B464B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{957EA675-30DD-45B6-B1E5-755E5C0AB0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957EA675-30DD-45B6-B1E5-755E5C0AB0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957EA675-30DD-45B6-B1E5-755E5C0AB0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{957EA675-30DD-45B6-B1E5-755E5C0AB0D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E75BBD-8196-4670-B0C4-063D940B464B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E75BBD-8196-4670-B0C4-063D940B464B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E75BBD-8196-4670-B0C4-063D940B464B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E75BBD-8196-4670-B0C4-063D940B464B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FE4D815-758C-4E34-9DA4-29FB4AD84354}
+	EndGlobalSection
+EndGlobal
