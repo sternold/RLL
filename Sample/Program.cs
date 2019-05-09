@@ -7,8 +7,12 @@ namespace Sample
     {
         static void Main(string[] args)
         {
-            var term = new Terminal();
-            term.Run();
+            using (var term = new Terminal())
+            {
+                term.SetFont("Fonts/courier.ttf");
+                term.Print("Hello World!");
+                term.Run();
+            }
         }
     }
 }

@@ -2,12 +2,19 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\RLL.Algorithms\RLL.Algorithms.csproj" />
     <ProjectReference Include="..\RLL.Terminal\RLL.Terminal.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Fonts\courier.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
