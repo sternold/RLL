@@ -1,12 +1,11 @@
 ﻿using RLL.Terminal;
-using System;
 using RLL.Terminal.Text;
 
 namespace Sample
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             using (var term = new Terminal())
             {

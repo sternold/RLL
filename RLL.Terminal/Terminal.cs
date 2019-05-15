@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.ES20;
 using QuickFont;
 using QuickFont.Configuration;
 using RLL.Terminal.Interfaces;
-using RLL.Terminal.Text;
 
 namespace RLL.Terminal
 {
     public class Terminal : ITerminal
     {
         private GameWindow window;
-
         private QFontDrawing drawing;
+
         private QFont font;
         private Matrix4 projection;
 
@@ -39,15 +37,8 @@ namespace RLL.Terminal
             drawing.Print(font, text, new Vector3(256, 256, 0), QFontAlignment.Centre, Color.Black);
         }
 
-        public void Run()
-        {
-            window.Run();
-        }
-
-        public GameWindow GetOpenGLContext()
-        {
-            return window;
-        }
+        public void Run() => window.Run();
+        public GameWindow GetOpenGLContext() => window;
 
         public void Dispose()
         {
@@ -60,10 +51,20 @@ namespace RLL.Terminal
         {
             GL.ClearColor(Color.White);
         }
+
         protected void OnResize(object sender, EventArgs e)
         {
-            GL.Viewport(window.ClientRectangle.X, window.ClientRectangle.Y, window.ClientRectangle.Width, window.ClientRectangle.Height);
-            projection = Matrix4.CreateOrthographicOffCenter(window.ClientRectangle.X, window.ClientRectangle.Y, window.ClientRectangle.Width, window.ClientRectangle.Height, -1.0f, 1.0f);
+            GL.Viewport(
+                window.ClientRectangle.X,
+                window.ClientRectangle.Y,
+                window.ClientRectangle.Width,
+                window.ClientRectangle.Height);
+            projection = Matrix4.CreateOrthographicOffCenter(
+                window.ClientRectangle.X,
+                window.ClientRectangle.Y,
+                window.ClientRectangle.Width,
+                window.ClientRectangle.Height,
+                -1.0f, 1.0f);
         }
 
         protected void OnRenderFrame(object sender, FrameEventArgs e)
