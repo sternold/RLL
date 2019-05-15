@@ -5,24 +5,32 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.ES20;
 using QuickFont;
 using QuickFont.Configuration;
+using RLL.Terminal.Interfaces;
+using RLL.Terminal.Text;
 
 namespace RLL.Terminal
 {
-    public class Terminal : GameWindow
+    public class Terminal : ITerminal
     {
+        private GameWindow window;
+
         private QFontDrawing drawing;
         private QFont font;
         private Matrix4 projection;
 
-        public Terminal(int width = 640, int height = 480, string title = "Roguelike Library Terminal")
-            : base(width, height, OpenTK.Graphics.GraphicsMode.Default, title)
-        {
-            drawing = new QFontDrawing();
-        }
+        public Text.Font Font { set => font = new QFont(value.Filename, value.Size, new QFontBuilderConfiguration(true)); }
+        public int Width { get => window.Width; set => window.Width = value; }
+        public int Height { get => window.Height; set => window.Height = value; }
+        public string Title { get => window.Title; set => window.Title = value; }
 
-        public void SetFont(string filename)
+        public Terminal(int width = 640, int height = 480, string title = "Roguelike Library Terminal")
         {
-            font = new QFont(filename, 10.0f, new QFontBuilderConfiguration(true));
+            window = new GameWindow();
+            window.Load += OnLoad;
+            window.Resize += OnResize;
+            window.RenderFrame += OnRenderFrame;
+
+            drawing = new QFontDrawing();
         }
 
         public void Print(string text)
@@ -31,34 +39,40 @@ namespace RLL.Terminal
             drawing.Print(font, text, new Vector3(256, 256, 0), QFontAlignment.Centre, Color.Black);
         }
 
-        protected override void OnLoad(EventArgs e)
+        public void Run()
         {
-            base.OnLoad(e);
-            GL.ClearColor(Color.White);
-        }
-        protected override void OnResize(EventArgs e)
-        {
-            base.OnResize(e);
-            GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
-            projection = Matrix4.CreateOrthographicOffCenter(ClientRectangle.X, ClientRectangle.Width, ClientRectangle.Y, ClientRectangle.Height, -1.0f, 1.0f);
+            window.Run();
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
+        public GameWindow GetOpenGLContext()
         {
-            base.OnRenderFrame(e);
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-            drawing.ProjectionMatrix = projection;
-            Print("Hello World!");
-            drawing.RefreshBuffers();
-            drawing.Draw();
-            SwapBuffers();
+            return window;
         }
 
-        protected override void Dispose(bool manual)
+        public void Dispose()
         {
-            base.Dispose(manual);
+            window?.Dispose();
             drawing?.Dispose();
             font?.Dispose();
+        }
+
+        protected void OnLoad(object sender, EventArgs e)
+        {
+            GL.ClearColor(Color.White);
+        }
+        protected void OnResize(object sender, EventArgs e)
+        {
+            GL.Viewport(window.ClientRectangle.X, window.ClientRectangle.Y, window.ClientRectangle.Width, window.ClientRectangle.Height);
+            projection = Matrix4.CreateOrthographicOffCenter(window.ClientRectangle.X, window.ClientRectangle.Y, window.ClientRectangle.Width, window.ClientRectangle.Height, -1.0f, 1.0f);
+        }
+
+        protected void OnRenderFrame(object sender, FrameEventArgs e)
+        {
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+            drawing.ProjectionMatrix = projection;
+            drawing.RefreshBuffers();
+            drawing.Draw();
+            window.SwapBuffers();
         }
     }
 }

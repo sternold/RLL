@@ -1,5 +1,6 @@
 ﻿using RLL.Terminal;
 using System;
+using RLL.Terminal.Text;
 
 namespace Sample
 {
@@ -9,7 +10,7 @@ namespace Sample
         {
             using (var term = new Terminal())
             {
-                term.SetFont("Fonts/courier.ttf");
+                term.Font = new Font { Filename = "Fonts/courier.ttf", Size = 10.0f };
                 term.Print("Hello World!");
                 term.Run();
             }
